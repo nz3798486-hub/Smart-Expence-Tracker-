@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig(() => {
   return {
-    base: '/Smart-Expence-Tracker-Ab/',
+    base: '/Smart-Expence-Tracker-/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
