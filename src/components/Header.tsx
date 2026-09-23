@@ -19,8 +19,57 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAddModal,
 }) => {
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 md:px-8 py-3 transition-colors">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-colors">
+      {/* Top Branding Animated Banner */}
+      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white border-b border-emerald-500/30 py-1.5 px-3 shadow-xs">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2.5 text-center leading-tight">
+          <div className="flex items-center gap-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="font-extrabold tracking-wide text-xs sm:text-[13px] animate-gradient-text uppercase">
+              Developed by Ai Agentic Automation
+            </span>
+          </div>
+
+          <span className="hidden sm:inline text-slate-600 font-bold">·</span>
+
+          <div className="flex items-center flex-wrap justify-center gap-1.5 text-xs sm:text-[13px] font-bold">
+            <span className="text-emerald-400 flex items-center gap-1 font-extrabold">
+              <svg
+                className="w-3.5 h-3.5 fill-current text-emerald-400 shrink-0"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.072-2.128-.517-1.748-.718-2.884-2.483-2.971-2.6-.088-.116-.708-.941-.708-1.792s.448-1.272.607-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.286.044.087.073.189.014.305-.058.116-.088.188-.175.29-.088.102-.185.228-.264.306-.088.088-.18.183-.077.36.102.174.454.748.974 1.212.67.597 1.235.782 1.409.869.174.087.276.073.378-.044.102-.116.435-.508.551-.682.116-.174.232-.145.39-.087.16.058 1.014.478 1.188.565.174.088.29.131.333.204.043.073.043.421-.101.826z" />
+              </svg>
+              <span>Whatsapp</span>
+            </span>
+            <a
+              href="https://wa.me/923401266879"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Chat on WhatsApp +923401266879"
+              className="text-white hover:text-emerald-300 font-mono tracking-tight font-extrabold underline decoration-emerald-500/60 hover:decoration-emerald-400 transition-colors"
+            >
+              +923401266879
+            </a>
+            <span className="text-slate-500">,</span>
+            <a
+              href="https://wa.me/923090641655"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Chat on WhatsApp +923090641655"
+              className="text-white hover:text-emerald-300 font-mono tracking-tight font-extrabold underline decoration-emerald-500/60 hover:decoration-emerald-400 transition-colors"
+            >
+              +923090641655
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between gap-4">
+
         {/* Zone 1: Brand Wordmark (Single text element) */}
         <button
           onClick={() => setActiveTab('dashboard')}
