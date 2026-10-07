@@ -9,12 +9,16 @@ import {
   CheckCircle2,
   Calculator,
   ShieldCheck,
+  User as UserIcon,
+  LogOut,
+  Mail,
 } from 'lucide-react';
 import { CURRENCIES } from '../utils/currencies';
 import { Transaction, BudgetLimit, SavingsGoal, LoanItem } from '../types';
 import { exportToCSV, exportToJSON } from '../utils/storage';
 import { DEFAULT_CATEGORIES } from '../utils/categorizer';
 import { CategoryIcon } from './CategoryIcon';
+import { useAuth } from '../context/AuthContext';
 
 interface SettingsViewProps {
   currency: string;
@@ -71,6 +75,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     e.target.value = '';
   };
 
+  const { user, logout } = useAuth();
+
   return (
     <div className="space-y-6 max-w-4xl mx-auto pb-12">
       {/* Title */}
@@ -79,9 +85,45 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           Preferences & Data Management
         </h1>
         <p className="text-xs text-slate-500 mt-0.5">
-          Configure preferred currency, export ledgers, and manage local storage
+          Configure preferred currency, account access, and export ledgers
         </p>
       </div>
+
+      {/* Account & Authentication Card */}
+      {user && (
+        <div className="bg-white rounded-2xl p-5 md:p-6 border border-slate-200/80 shadow-xs">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm shrink-0 border border-emerald-200">
+                <UserIcon size={18} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-slate-900">{user.email}</span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                    <ShieldCheck size={11} /> Authenticated
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Firebase Authentication · Active Session
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                if (confirm('Are you sure you want to log out?')) {
+                  logout();
+                }
+              }}
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl transition-colors cursor-pointer"
+            >
+              <LogOut size={14} />
+              <span>Log Out</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Currency Preference Card */}
       <div className="bg-white rounded-2xl p-5 md:p-6 border border-slate-200/80 shadow-xs">

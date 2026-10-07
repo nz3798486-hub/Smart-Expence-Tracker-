@@ -32,8 +32,12 @@ import { LoansAndSavingsView } from './components/LoansAndSavingsView';
 import { SettingsView } from './components/SettingsView';
 import { TransactionModal } from './components/TransactionModal';
 import { BudgetModal } from './components/BudgetModal';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthScreen } from './components/AuthScreen';
 
-export default function App() {
+function ExpenseTrackerContent() {
+  const { user, loading } = useAuth();
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [budgets, setBudgets] = useState<BudgetLimit[]>([]);
   const [savingsGoals, setSavingsGoals] = useState<SavingsGoal[]>([]);
@@ -228,6 +232,23 @@ export default function App() {
     setIsAddModalOpen(true);
   };
 
+  // If Firebase is resolving authentication state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
+        <div className="w-10 h-10 border-3 border-emerald-600/20 border-t-emerald-600 rounded-full animate-spin mb-3" />
+        <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+          Verifying Session...
+        </span>
+      </div>
+    );
+  }
+
+  // If not logged in, enforce authentication screen
+  if (!user) {
+    return <AuthScreen />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col antialiased selection:bg-emerald-500 selection:text-white">
       {/* Top Bar adheres to Top Bar Contract */}
@@ -340,3 +361,12 @@ export default function App() {
     </div>
   );
 }
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <ExpenseTrackerContent />
+    </AuthProvider>
+  );
+}
+
